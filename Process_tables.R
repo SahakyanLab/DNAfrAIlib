@@ -54,12 +54,6 @@ df_qm_norm <- df_qm_norm %>%
     dplyr::mutate(category = params, .before = 1) %>% 
     as.data.table(.) 
 
-fwrite(
-    df_qm_norm,
-    file = paste0("./", kmer, "-mer/QM_PARAMETERS.csv"),
-    showProgress = FALSE
-)
-
 # concatenate files
 df_concat <- rbind(df_breaks, df_qm_norm)
 df_concat <- as.data.table(df_concat)
@@ -68,5 +62,11 @@ df_concat <- as.data.table(df_concat)
 fwrite(
     df_concat, 
     paste0("QueryTable_kmer-", kmer, "_zscore.csv"),
+    showProgress = FALSE
+)
+
+fwrite(
+    df_qm_norm,
+    file = paste0("./", kmer, "-mer/QM_PARAMETERS.csv"),
     showProgress = FALSE
 )
